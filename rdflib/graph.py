@@ -1463,15 +1463,20 @@ class ConjunctiveGraph(Graph):
     def __reduce__(self):
         return (ConjunctiveGraph, (self.store, self.identifier))
 
-ConjunctiveGraph.serialize.__doc__ = """Serialize the Graph to destination
+    def serialize(self, destination=None, format="xml",
+                  base=None, encoding=None, **args):
+        """Serialize the ConjunctiveGraph to destination
 
-If destination is None serialize method returns the serialization as a
-string. Format defaults to xml (AKA rdf/xml).
+        If destination is None serialize method returns the serialization as a
+        string. Format defaults to xml (AKA rdf/xml).
 
-Format support can be extended with plugins,
-but 'xml', 'n3', 'turtle', 'nt', 'nquads',
-'pretty-xml', 'trig', and 'trix' are built in.
-"""
+        Format support can be extended with plugins,
+        but 'xml', 'n3', 'turtle', 'nt', 'nquads',
+        'pretty-xml', 'trig', and 'trix' are built in.
+        """
+        return super(ConjunctiveGraph, self).serialize(
+            destination = destination, format = format,
+            base = base, encoding = encoding, **args)
 
 
 DATASET_DEFAULT_GRAPH_ID = URIRef('urn:x-rdflib:default')
